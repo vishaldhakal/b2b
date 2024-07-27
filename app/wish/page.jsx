@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, AlertCircle, Zap, Clock } from "lucide-react";
+import { ArrowRight, Check, AlertCircle } from "lucide-react";
 
 const wishes = [
   {
@@ -76,92 +76,91 @@ const offers = [
   },
 ];
 
-const OfferMatchingPage = () => {
-  const [selectedOffer, setSelectedOffer] = useState(null);
+const MatchingPage = () => {
+  const [selectedWish, setSelectedWish] = useState(null);
   const [exactMatches, setExactMatches] = useState([]);
   const [probableMatches, setProbableMatches] = useState([]);
 
   useEffect(() => {
-    if (selectedOffer) {
+    if (selectedWish) {
       // Simulate matching logic (replace with actual matching algorithm)
       setExactMatches(
-        wishes.filter(
-          (wish) =>
-            wish.category === selectedOffer.category &&
-            wish.type === selectedOffer.type
+        offers.filter(
+          (offer) =>
+            offer.category === selectedWish.category &&
+            offer.type === selectedWish.type
         )
       );
       setProbableMatches(
-        wishes
+        offers
           .filter(
-            (wish) =>
-              wish.category === selectedOffer.category ||
-              wish.type === selectedOffer.type
+            (offer) =>
+              offer.category === selectedWish.category ||
+              offer.type === selectedWish.type
           )
           .slice(0, 3)
       ); // Limit to 3 probable matches for this example
     }
-  }, [selectedOffer]);
+  }, [selectedWish]);
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-start">
+      <h1 className="text-3xl font-bold text-center mb-8">
         Your offers and matching wishes
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Offers Column */}
+        {/* Wishes Column */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold mb-4">Select an Offer</h2>
+          <h2 className="text-xl font-semibold mb-4">Select a Wish</h2>
           <div className="space-y-4">
-            {offers.map((offer) => (
+            {wishes.map((wish) => (
               <motion.div
-                key={offer.id}
+                key={wish.id}
                 className={`p-4 rounded-lg cursor-pointer ${
-                  selectedOffer?.id === offer.id
-                    ? "bg-green-100 border-2 border-green-500"
+                  selectedWish?.id === wish.id
+                    ? "bg-blue-100 border-2 border-blue-500"
                     : "bg-gray-100 hover:bg-gray-200"
                 }`}
-                onClick={() => setSelectedOffer(offer)}
+                onClick={() => setSelectedWish(wish)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <h3 className="font-semibold">{offer.title}</h3>
+                <h3 className="font-semibold">{wish.title}</h3>
                 <p className="text-sm text-gray-600">
-                  {offer.category} - {offer.type}
+                  {wish.category} - {wish.type}
                 </p>
               </motion.div>
             ))}
           </div>
         </div>
-
         {/* Matching Area */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold mb-4">Matches</h2>
-          {selectedOffer ? (
+          {selectedWish ? (
             <div className="space-y-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-4 bg-green-100 rounded-lg"
+                className="p-4 bg-blue-100 rounded-lg"
               >
-                <h3 className="font-semibold">{selectedOffer.title}</h3>
+                <h3 className="font-semibold">{selectedWish.title}</h3>
                 <p className="text-sm text-gray-600">
-                  {selectedOffer.category} - {selectedOffer.type}
+                  {selectedWish.category} - {selectedWish.type}
                 </p>
               </motion.div>
               <div className="flex justify-center items-center">
-                <ArrowRight className="w-8 h-8 text-green-500" />
+                <ArrowRight className="w-8 h-8 text-blue-500" />
               </div>
               {exactMatches.length > 0 ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-blue-100 rounded-lg"
+                  className="p-4 bg-green-100 rounded-lg"
                 >
                   <h3 className="font-semibold flex items-center">
-                    <Zap className="w-5 h-5 mr-2 text-blue-500" />
-                    Exact Wish Match Found!
+                    <Check className="w-5 h-5 mr-2 text-green-500" />
+                    Exact Match Found!
                   </h3>
                   <p className="text-sm text-gray-600">
                     {exactMatches[0].title}
@@ -174,61 +173,60 @@ const OfferMatchingPage = () => {
                   className="p-4 bg-yellow-100 rounded-lg"
                 >
                   <h3 className="font-semibold flex items-center">
-                    <Clock className="w-5 h-5 mr-2 text-yellow-500" />
-                    No Exact Matches Yet
+                    <AlertCircle className="w-5 h-5 mr-2 text-yellow-500" />
+                    No Exact Matches
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Check probable matches below
+                    Check probable matches
                   </p>
                 </motion.div>
               )}
             </div>
           ) : (
-            <p className="text-center text-gray-500">
-              Select an offer to see matching wishes
+            <p className="text-start text-gray-500">
+              Select a wish to see matches
             </p>
           )}
         </div>
-
-        {/* Wishes Column */}
+        {/* Offers Column */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold mb-4">Probable Wish Matches</h2>
-          {selectedOffer && (
+          <h2 className="text-xl font-semibold mb-4">Probable Matches</h2>
+          {selectedWish && (
             <div className="space-y-4">
-              {probableMatches.map((wish) => (
+              {probableMatches.map((offer) => (
                 <motion.div
-                  key={wish.id}
+                  key={offer.id}
                   className="p-4 bg-gray-100 rounded-lg"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="font-semibold">{wish.title}</h3>
+                  <h3 className="font-semibold">{offer.title}</h3>
                   <p className="text-sm text-gray-600">
-                    {wish.category} - {wish.type}
+                    {offer.category} - {offer.type}
                   </p>
                   <div className="mt-2 text-sm">
                     <span
                       className={`inline-block px-2 py-1 rounded ${
-                        wish.category === selectedOffer.category
+                        offer.category === selectedWish.category
                           ? "bg-green-200 text-green-800"
                           : "bg-red-200 text-red-800"
                       }`}
                     >
                       Category:{" "}
-                      {wish.category === selectedOffer.category
+                      {offer.category === selectedWish.category
                         ? "Match"
                         : "Mismatch"}
                     </span>
                     <span
                       className={`inline-block px-2 py-1 rounded ml-2 ${
-                        wish.type === selectedOffer.type
+                        offer.type === selectedWish.type
                           ? "bg-green-200 text-green-800"
                           : "bg-red-200 text-red-800"
                       }`}
                     >
                       Type:{" "}
-                      {wish.type === selectedOffer.type ? "Match" : "Mismatch"}
+                      {offer.type === selectedWish.type ? "Match" : "Mismatch"}
                     </span>
                   </div>
                 </motion.div>
@@ -241,4 +239,4 @@ const OfferMatchingPage = () => {
   );
 };
 
-export default OfferMatchingPage;
+export default MatchingPage;

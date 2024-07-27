@@ -1,182 +1,133 @@
-import Link from "next/link";
+"use client";
 
-function Navbar() {
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+
+const NavLink = ({ href, children }) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
   return (
-    <header className="pb-6 bg-white lg:pb-0 sticky top-0 shadow-2xl">
+    <Link
+      href={href}
+      className={`text-base font-medium transition-all duration-200 ${
+        isActive ? "text-blue-600" : "text-black hover:text-blue-600"
+      }`}
+    >
+      {children}
+    </Link>
+  );
+};
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const closeMenu = () => setIsOpen(false);
+
+  useEffect(() => {
+    closeMenu();
+  }, [pathname]);
+
+  const navItems = [
+    { href: "/events", label: "B2B Events" },
+    { href: "/wish", label: "Wish" },
+    { href: "/offer", label: "Offer" },
+    { href: "/match", label: "Match" },
+    { href: "/supply", label: "Supply Chain" },
+  ];
+
+  return (
+    <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between h-16 lg:h-20">
           <div className="flex-shrink-0">
-            <Link href="/">
-              <h1 className="font-extrabold text-4xl">
+            <Link href="/" className="flex items-center">
+              <h1 className="font-extrabold text-3xl lg:text-4xl">
                 b2bbazzar<span className="text-yellow-400">.</span>
               </h1>
             </Link>
           </div>
 
+          <div className="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-8">
+            {navItems.map((item) => (
+              <NavLink key={item.href} href={item.href}>
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
+
+          <div className="hidden lg:flex lg:items-center lg:ml-8">
+            <Link
+              href="/login"
+              className="px-4 py-2 text-base font-semibold text-white transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:bg-blue-700"
+            >
+              Login / Register
+            </Link>
+          </div>
+
           <button
             type="button"
-            className="inline-flex p-2 text-black transition-all duration-200 rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100"
+            className="inline-flex items-center p-2 text-black transition-all duration-200 rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100"
+            onClick={toggleMenu}
           >
-            <svg
-              className="block w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 8h16M4 16h16"
-              />
-            </svg>
-
-            <svg
-              className="hidden w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
-
-          <div className="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-10">
-            {/* <Link
-              href="/"
-              title=""
-              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-            >
-              {" "}
-              Home{" "}
-            </Link> */}
-
-            <Link
-              href="/events"
-              title=""
-              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-            >
-              {" "}
-              B2B Events{" "}
-            </Link>
-
-            <Link
-              href="/wish"
-              title=""
-              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-            >
-              {" "}
-              Wish{" "}
-            </Link>
-
-            <Link
-              href="/offer"
-              title=""
-              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-            >
-              {" "}
-              Offer{" "}
-            </Link>
-            <Link
-              href="/match"
-              title=""
-              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-            >
-              {" "}
-              Match{" "}
-            </Link>
-            <Link
-              href="/supply"
-              title=""
-              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-            >
-              {" "}
-              Supply Chain{" "}
-            </Link>
-            <a
-              href="#"
-              title=""
-              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-            >
-              {" "}
-              More{" "}
-            </a>
-          </div>
-
-          <a
-            href="#"
-            title=""
-            className="items-center justify-center hidden px-4 py-3 ml-10 text-base font-semibold text-white transition-all duration-200 bg-[#365555] border border-transparent rounded-md lg:inline-flex hover:bg-blue-700 focus:bg-blue-700"
-            role="button"
-          >
-            {" "}
-            Login / Register{" "}
-          </a>
         </nav>
+      </div>
 
-        <nav className="pt-4 pb-6 bg-white border border-gray-200 rounded-md shadow-md lg:hidden">
-          <div className="flow-root">
-            <div className="flex flex-col px-6 -my-2 space-y-1">
-              <a
-                href="#"
-                title=""
-                className="inline-flex py-2 text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-              >
-                {" "}
-                Features{" "}
-              </a>
-
-              <a
-                href="#"
-                title=""
-                className="inline-flex py-2 text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-              >
-                {" "}
-                Solutions{" "}
-              </a>
-
-              <a
-                href="#"
-                title=""
-                className="inline-flex py-2 text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-              >
-                {" "}
-                Resources{" "}
-              </a>
-
-              <a
-                href="#"
-                title=""
-                className="inline-flex py-2 text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-              >
-                {" "}
-                Pricing{" "}
-              </a>
-            </div>
+      {/* Side Drawer */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden ${
+          isOpen ? "visible" : "invisible"
+        }`}
+      >
+        <div
+          className="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out"
+          onClick={closeMenu}
+        />
+        <nav
+          className={`absolute top-0 right-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-l overflow-y-auto transition-all duration-300 ease-in-out ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="font-extrabold text-2xl">
+              b2bbazzar<span className="text-yellow-400">.</span>
+            </h1>
+            <button
+              type="button"
+              className="p-2 text-black rounded-md focus:bg-gray-100 hover:bg-gray-100"
+              onClick={closeMenu}
+            >
+              <X className="w-6 h-6" />
+            </button>
           </div>
 
-          <div className="px-6 mt-6">
-            <a
-              href="#"
-              title=""
-              className="inline-flex justify-center px-4 py-3 text-base font-semibold text-white transition-all duration-200 bg-[#639190] border border-transparent rounded-md tems-center hover:bg-blue-700 focus:bg-blue-700"
-              role="button"
+          <div className="flex flex-col space-y-4">
+            {navItems.map((item) => (
+              <NavLink key={item.href} href={item.href}>
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
+
+          <div className="mt-auto pt-6">
+            <Link
+              href="/login"
+              className="block w-full px-4 py-3 text-center font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:bg-blue-700"
             >
-              {" "}
-              Get started now{" "}
-            </a>
+              Login / Register
+            </Link>
           </div>
         </nav>
       </div>
     </header>
   );
-}
+};
 
 export default Navbar;
