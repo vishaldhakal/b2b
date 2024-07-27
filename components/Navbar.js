@@ -1,12 +1,16 @@
+import Link from "next/link";
+
 function Navbar() {
   return (
     <header className="pb-6 bg-white lg:pb-0 sticky top-0 shadow-2xl">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between h-16 lg:h-20">
           <div className="flex-shrink-0">
-            <h1 className="font-extrabold text-4xl">
-              b2bbazzar<span className="text-yellow-400">.</span>
-            </h1>
+            <Link href="/">
+              <h1 className="font-extrabold text-4xl">
+                b2bbazzar<span className="text-yellow-400">.</span>
+              </h1>
+            </Link>
           </div>
 
           <button
@@ -45,41 +49,41 @@ function Navbar() {
           </button>
 
           <div className="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-10">
-            <a
-              href="#"
+            <Link
+              href="/"
               title=""
               className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
             >
               {" "}
               Home{" "}
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/events"
               title=""
               className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
             >
               {" "}
               B2B Events{" "}
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/wish"
               title=""
               className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
             >
               {" "}
               Wish{" "}
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/offer"
               title=""
               className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
             >
               {" "}
               Offer{" "}
-            </a>
+            </Link>
             <a
               href="#"
               title=""
