@@ -49,14 +49,14 @@ function Navbar() {
           </button>
 
           <div className="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-10">
-            <Link
+            {/* <Link
               href="/"
               title=""
               className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
             >
               {" "}
               Home{" "}
-            </Link>
+            </Link> */}
 
             <Link
               href="/events"
@@ -83,6 +83,22 @@ function Navbar() {
             >
               {" "}
               Offer{" "}
+            </Link>
+            <Link
+              href="/match"
+              title=""
+              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
+            >
+              {" "}
+              Match{" "}
+            </Link>
+            <Link
+              href="/supply"
+              title=""
+              className="text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
+            >
+              {" "}
+              Supply Chain{" "}
             </Link>
             <a
               href="#"
