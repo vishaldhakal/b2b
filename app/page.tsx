@@ -7,7 +7,7 @@ import {
   DistrictSection,
   FeaturesSection,
   SupplyChainSection,
-} from "../components/sections/@landing";
+} from "../@/components/sections/@landing";
 
 const fadeInUp: Variants = {
   initial: { opacity: 0, y: 60 },

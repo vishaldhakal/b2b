@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
-import SupplyChainVisualization from "../../components/sections/@supply/supply-chain-management";
+import SupplyChainVisualization from "../../@/components/sections/@supply/supply-chain-management";
 
 const useSupplyChain = (initialStage = 3) => {
   const [userStage, setUserStage] = useState(initialStage);
