@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Lock, GitHub, Linkedin } from "lucide-react";
+import { Mail, Lock, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 
 function LoginPage() {
@@ -150,7 +150,7 @@ function LoginPage() {
               href="#"
               className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
             >
-              <GitHub className="w-5 h-5" />
+              <Github className="w-5 h-5" />
             </a>
           </div>
           <div>

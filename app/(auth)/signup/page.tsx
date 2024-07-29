@@ -4,8 +4,14 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+type FormData = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 const SignupPage = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     password: "",
@@ -29,7 +35,12 @@ const SignupPage = () => {
   };
 
   const validateForm = () => {
-    let newErrors = {};
+    let newErrors: FormData = {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    };
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(formData.email))
