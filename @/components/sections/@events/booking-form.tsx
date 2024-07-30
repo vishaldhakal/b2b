@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { X, Users, Briefcase } from "lucide-react";
+import { Users } from "lucide-react";
 
 import { Button } from "../../../components/ui/button";
 import {
