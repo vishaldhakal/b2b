@@ -34,7 +34,12 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const navItems = [
-    { href: "/b2b-bazaar", label: "B2B Events", subtitle: "Wish and Offers" },
+    {
+      href: "/b2b-bazaar",
+      label: "B2B Events",
+      subtitle: "Join Networking Events",
+    },
+    { href: "/wish-and-offers", label: "Wish & Offers" },
     { href: "/business-clinic", label: "Business Clinic" },
     { href: "/training", label: "Training" },
     { href: "/fundraising", label: "Fundraising" },
