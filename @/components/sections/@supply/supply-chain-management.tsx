@@ -89,7 +89,7 @@ const SupplyChainVisualization = ({ userStage, setUserStage }) => {
                       {stage.count} businesses
                     </div>
                     {isActive && (
-                      <div className="mt-1 bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">
+                      <div className="mt-1 bg-blue-900 text-white text-xs px-2 py-0.5 rounded-full">
                         You are here
                       </div>
                     )}

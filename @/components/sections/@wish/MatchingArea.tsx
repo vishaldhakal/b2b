@@ -33,7 +33,7 @@ const MatchingArea: React.FC<MatchingAreaProps> = ({
         <div className="flex justify-center items-center">
           <ArrowRight
             className={`w-8 h-8 ${
-              isOffer ? "text-green-500" : "text-blue-500"
+              isOffer ? "text-green-500" : "text-blue-900"
             }`}
           />
         </div>
@@ -48,7 +48,7 @@ const MatchingArea: React.FC<MatchingAreaProps> = ({
             <h3 className="font-semibold flex items-center">
               <Zap
                 className={`w-5 h-5 mr-2 ${
-                  isOffer ? "text-blue-500" : "text-green-500"
+                  isOffer ? "text-blue-900" : "text-green-500"
                 }`}
               />
               Exact {isOffer ? "Wish" : "Offer"} Match Found!

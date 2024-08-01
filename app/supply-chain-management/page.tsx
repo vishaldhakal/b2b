@@ -18,7 +18,7 @@ const supplyChainStages: SupplyChainStage[] = [
     id: "manufacturing",
     name: "Manufacturing",
     icon: <Factory className="w-8 h-8" />,
-    color: "bg-blue-500",
+    color: "bg-blue-900",
   },
   {
     id: "distribution",

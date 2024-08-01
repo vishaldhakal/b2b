@@ -78,7 +78,7 @@ export const EventList: React.FC = () => {
           </CardContent>
           <CardFooter className="flex justify-between items-center">
             <Badge variant="secondary">{event.type}</Badge>
-            <Button>Register</Button>
+            <Button variant="outline">Attend this event</Button>
           </CardFooter>
         </Card>
       ))}

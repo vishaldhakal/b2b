@@ -8,29 +8,44 @@ import {
 } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 
+const districts = [
+  "Taplejung",
+  "Panchthar",
+  "Ilam",
+  "Jhapa",
+  "Morang",
+  "Sunsari",
+  "Dhankuta",
+  "Terhathum",
+  "Sankhuwasabha",
+  "Bhojpur",
+  "Solukhumbu",
+  "Okhaldhunga",
+  "Khotang",
+  "Udayapur",
+];
+
 const DistrictButton = ({ name }) => (
-  <Button variant="outline" className="w-full justify-start">
+  <Button variant="outline" className="w-full justify-start shadow-none">
     <MapPin className="mr-2 h-4 w-4 text-blue-600" />
     {name}
   </Button>
 );
 
 const DistrictSection = () => (
-  <Card>
-    <CardHeader>
-      <CardTitle className="text-2xl">District B2B Networking</CardTitle>
+  <>
+    <div>
+      <h3 className="text-2xl font-black">District B2B Networking</h3>
       <p className="text-gray-600">
         Explore business opportunities in specific districts and regions.
       </p>
-    </CardHeader>
-    <CardContent>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {["Biratnagar", "Itahari", "Birtamod", "Jhapa"].map((district) => (
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-5 mt-10">
+        {districts.map((district) => (
           <DistrictButton key={district} name={district} />
         ))}
       </div>
-    </CardContent>
-  </Card>
+    </div>
+  </>
 );
 
 export default DistrictSection;

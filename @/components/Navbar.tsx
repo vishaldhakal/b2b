@@ -21,7 +21,7 @@ const NavLink = ({ href, children }) => {
   return (
     <Link
       href={href}
-      className={`text-base font-medium transition-all duration-200 ${
+      className={`text-base font-medium transition-all duration-200 flex justify-center items-center flex-col ${
         isActive ? "text-blue-600" : "text-black hover:text-blue-600"
       }`}
     >
@@ -34,10 +34,11 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const navItems = [
-    { href: "/events", label: "B2B Events" },
-    { href: "/wish", label: "Wish" },
-    { href: "/offer", label: "Offer" },
-    { href: "/supply", label: "Supply Chain" },
+    { href: "/b2b-bazaar", label: "B2B Events", subtitle: "Wish and Offers" },
+    { href: "/business-clinic", label: "Business Clinic" },
+    { href: "/training", label: "Training" },
+    { href: "/fundraising", label: "Fundraising" },
+    { href: "/job-board", label: "Jobs" },
   ];
 
   return (
@@ -47,7 +48,7 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <h1 className="font-extrabold text-3xl lg:text-4xl">
-                b2bbazzar<span className="text-yellow-400">.</span>
+                b2bbazzar<span className="text-yellow-500">.</span>
               </h1>
             </Link>
           </div>
@@ -55,7 +56,12 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-8">
             {navItems.map((item) => (
               <NavLink key={item.href} href={item.href}>
-                {item.label}
+                <span className="text-sm">{item.label}</span>
+                {item.subtitle && (
+                  <span className="block font-normal text-gray-500 text-xs">
+                    {item.subtitle}
+                  </span>
+                )}
               </NavLink>
             ))}
           </div>

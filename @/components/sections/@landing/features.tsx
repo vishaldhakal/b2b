@@ -19,17 +19,14 @@ import {
 } from "lucide-react";
 
 const FeatureCard = ({ title, description, icon: Icon, slug }) => (
-  <Link
-    href={`/${slug}`}
-    className="block hover:shadow-lg transition-shadow duration-300"
-  >
+  <Link href={`/${slug}`} className="block duration-300">
     <Card>
       <CardHeader>
-        <Icon className="h-8 w-8 text-blue-600 mb-2" />
-        <CardTitle className="text-lg">{title}</CardTitle>
+        <Icon className="h-6 w-6 text-blue-600 mb-2" />
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-gray-600">{description}</p>
+        <CardTitle className="text-md">{title}</CardTitle>
+        <p className="text-xs text-gray-600 mt-1">{description}</p>
       </CardContent>
     </Card>
   </Link>
@@ -69,11 +66,6 @@ const features = [
     icon: Users,
   },
   {
-    title: "Wish and Offers",
-    description: "Find what you need or offer your services",
-    icon: Search,
-  },
-  {
     title: "Fundraising",
     description: "Seek investments for your business",
     icon: DollarSign,
@@ -87,8 +79,7 @@ const features = [
 
 const FeaturesSection = () => (
   <section className="py-12">
-    <h2 className="text-3xl font-bold mb-8">Our Features</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       {features.map((feature) => (
         <FeatureCard
           key={feature.title}

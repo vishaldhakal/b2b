@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Input } from "../../ui/input";
+import { CreateEventButton } from "./CreateEventButton";
 import {
   Select,
   SelectContent,
@@ -48,16 +49,15 @@ const SearchFilter = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-white rounded-lg shadow-md p-4 mb-6"
+        className="bg-white rounded-lg border p-4 mb-6"
       >
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-start gap-3">
           <FormField
             control={form.control}
             name="search"
             render={({ field }) => (
               <FormItem>
                 <div className="flex items-center mb-4 md:mb-0">
-                  <Search className="w-5 h-5 text-gray-400 mr-2" />
                   <FormControl>
                     <Input
                       {...field}
@@ -77,7 +77,6 @@ const SearchFilter = () => {
             render={({ field }) => (
               <FormItem>
                 <div className="flex items-center">
-                  <Filter className="w-5 h-5 text-gray-400 mr-2" />
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -103,6 +102,9 @@ const SearchFilter = () => {
           <Button type="submit" className="ml-4">
             Search
           </Button>
+          <div className="ml-auto">
+            <CreateEventButton />
+          </div>
         </div>
       </form>
     </Form>

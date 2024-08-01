@@ -5,16 +5,14 @@ import {
   HeroSection,
   DistrictSection,
   FeaturesSection,
-  SupplyChainSection,
 } from "../@/components/sections/@landing";
 
 export default function Home() {
   return (
-    <main className="container mx-auto px-4 py-8 space-y-16">
+    <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 py-8 space-y-16">
       <HeroSection />
       <FeaturesSection />
       <DistrictSection />
-      <SupplyChainSection />
     </main>
   );
 }

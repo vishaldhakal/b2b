@@ -1,6 +1,11 @@
-import React from 'react';
-import { Cloud, ThermometerSun, Droplet, Wind } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent } from "../../@/components/ui/card";
+import React from "react";
+import { Cloud, ThermometerSun, Droplet, Wind } from "lucide-react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "../../@/components/ui/card";
 
 export const WeatherWidget: React.FC = () => (
   <Card className="mb-6">
@@ -10,7 +15,7 @@ export const WeatherWidget: React.FC = () => (
     <CardContent>
       <div className="flex flex-wrap justify-between items-center">
         <div className="flex items-center mb-2">
-          <Cloud className="w-8 h-8 text-blue-500 mr-2" />
+          <Cloud className="w-8 h-8 text-blue-900 mr-2" />
           <span>Partly Cloudy</span>
         </div>
         <div className="flex items-center mb-2">
@@ -18,7 +23,7 @@ export const WeatherWidget: React.FC = () => (
           <span>25°C</span>
         </div>
         <div className="flex items-center mb-2">
-          <Droplet className="w-8 h-8 text-blue-500 mr-2" />
+          <Droplet className="w-8 h-8 text-blue-900 mr-2" />
           <span>Humidity: 65%</span>
         </div>
         <div className="flex items-center mb-2">

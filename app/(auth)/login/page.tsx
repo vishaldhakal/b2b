@@ -61,7 +61,7 @@ function LoginPage() {
             Or{" "}
             <Link
               href="/signup"
-              className="font-medium text-blue-500 hover:underline"
+              className="font-medium text-blue-900 hover:underline"
             >
               create an account
             </Link>

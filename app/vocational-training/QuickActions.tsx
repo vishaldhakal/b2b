@@ -9,7 +9,7 @@ export const QuickActions: React.FC = () => {
         <Play className="w-6 h-6 mr-2" />
         Start New Course
       </Button>
-      <Button variant="secondary" className="bg-blue-500 hover:bg-blue-600">
+      <Button variant="secondary" className="bg-blue-900 hover:bg-blue-900">
         <Book className="w-6 h-6 mr-2" />
         Browse Catalog
       </Button>

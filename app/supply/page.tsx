@@ -40,7 +40,7 @@ const SupplyChainManagementPage = () => {
           chain.
         </p>
         <button
-          className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300 flex items-center mx-auto"
+          className="bg-blue-900 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300 flex items-center mx-auto"
           onClick={() => setUserStage((prev) => (prev % 5) + 1)}
         >
           Next Stage <ChevronRight className="ml-2" />
