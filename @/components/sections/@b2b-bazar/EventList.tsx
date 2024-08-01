@@ -7,12 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "../../ui/card";
+import Image from "next/image";
 import { Button } from "../../ui/button";
 import { Badge } from "../../ui/badge";
 
 interface Event {
   id: number;
   title: string;
+  thumbnail?: string;
   date: string;
   location: string;
   attendees: number;
@@ -23,6 +25,7 @@ const mockEvents: Event[] = [
   {
     id: 1,
     title: "Nepal Tech Summit 2024",
+    thumbnail: "/13.png",
     date: "Aug 15, 2024",
     location: "Kathmandu",
     attendees: 500,
@@ -32,6 +35,7 @@ const mockEvents: Event[] = [
     id: 2,
     title: "Agricultural Innovation Expo",
     date: "Sep 5, 2024",
+    thumbnail: "/13.png",
     location: "Pokhara",
     attendees: 300,
     type: "Agriculture",
@@ -41,6 +45,7 @@ const mockEvents: Event[] = [
     title: "Himalayan Business Network Meet",
     date: "Oct 10, 2024",
     location: "Biratnagar",
+    thumbnail: "/13.png",
     attendees: 200,
     type: "Networking",
   },
@@ -48,6 +53,7 @@ const mockEvents: Event[] = [
     id: 4,
     title: "Sustainable Tourism Conference",
     date: "Nov 20, 2024",
+    thumbnail: "/13.png",
     location: "Chitwan",
     attendees: 250,
     type: "Tourism",
@@ -60,6 +66,13 @@ export const EventList: React.FC = () => {
       {mockEvents.map((event) => (
         <Card key={event.id}>
           <CardHeader>
+            <Image
+              src={event.thumbnail}
+              className="max-w-100"
+              alt="event thumbnail"
+              width={600}
+              height={600}
+            />
             <CardTitle>{event.title}</CardTitle>
           </CardHeader>
           <CardContent>
