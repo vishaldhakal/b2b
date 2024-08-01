@@ -47,66 +47,70 @@ const SearchFilter = () => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-white rounded-lg border p-4 mb-6"
-      >
-        <div className="flex flex-col md:flex-row md:items-center md:justify-start gap-3">
-          <FormField
-            control={form.control}
-            name="search"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex items-center mb-4 md:mb-0">
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      placeholder="Search events..."
-                      className="w-full md:w-64"
-                    />
-                  </FormControl>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex items-center">
-                  <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="All Categories" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Categories</SelectItem>
-                        <SelectItem value="technology">Technology</SelectItem>
-                        <SelectItem value="agriculture">Agriculture</SelectItem>
-                        <SelectItem value="networking">Networking</SelectItem>
-                        <SelectItem value="tourism">Tourism</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="ml-4">
-            Search
-          </Button>
-          <div className="ml-auto">
-            <CreateEventButton />
+      <div className="flex flex-col md:flex-row md:items-center md:justify-start gap-3">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="bg-white rounded-lg border p-4 mb-6"
+        >
+          <div className="flex flex-col md:flex-row items-center gap-3">
+            <FormField
+              control={form.control}
+              name="search"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center mb-4 md:mb-0">
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="text"
+                        placeholder="Search events..."
+                        className="w-full md:w-64"
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center">
+                    <FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger className="w-[180px]">
+                          <SelectValue placeholder="All Categories" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Categories</SelectItem>
+                          <SelectItem value="technology">Technology</SelectItem>
+                          <SelectItem value="agriculture">
+                            Agriculture
+                          </SelectItem>
+                          <SelectItem value="networking">Networking</SelectItem>
+                          <SelectItem value="tourism">Tourism</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="ml-4">
+              Search
+            </Button>
           </div>
+        </form>
+        <div className="ml-auto">
+          <CreateEventButton />
         </div>
-      </form>
+      </div>
     </Form>
   );
 };

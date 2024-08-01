@@ -6,11 +6,29 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../ui/card";
+} from "../../../components/ui/card";
 import Image from "next/image";
-import { Button } from "../../ui/button";
-import { Badge } from "../../ui/badge";
-
+import { Button } from "../../../components/ui/button";
+import { Badge } from "../../../components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../../components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../components/ui/form";
+import { Input } from "../../../components/ui/input";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 interface Event {
   id: number;
   title: string;
@@ -59,15 +77,114 @@ const mockEvents: Event[] = [
     type: "Tourism",
   },
 ];
+const schema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup.string().email("Invalid email").required("Email is required"),
+  company: yup.string().required("Company name is required"),
+  position: yup.string().required("Position is required"),
+  phone: yup.string().required("Phone number is required"),
+});
+
+type FormData = yup.InferType<typeof schema>;
+
+const AttendanceForm: React.FC<{ event: Event; onClose: () => void }> = ({
+  event,
+  onClose,
+}) => {
+  const form = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+    // Here you would typically send the data to your backend
+    onClose();
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Your full name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Your email address" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="company"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Company</FormLabel>
+              <FormControl>
+                <Input placeholder="Your company name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="position"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Position</FormLabel>
+              <FormControl>
+                <Input placeholder="Your position" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone</FormLabel>
+              <FormControl>
+                <Input placeholder="Your phone number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  );
+};
 
 export const EventList: React.FC = () => {
+  const [selectedEvent, setSelectedEvent] = React.useState<Event | null>(null);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {mockEvents.map((event) => (
         <Card key={event.id}>
           <CardHeader>
             <Image
-              src={event.thumbnail}
+              src={event.thumbnail || "/placeholder.png"}
               className="max-w-100"
               alt="event thumbnail"
               width={600}
@@ -91,7 +208,34 @@ export const EventList: React.FC = () => {
           </CardContent>
           <CardFooter className="flex justify-between items-center">
             <Badge variant="secondary">{event.type}</Badge>
-            <Button variant="outline">Attend this event</Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedEvent(event)}
+                >
+                  Attend this event
+                </Button>
+              </DialogTrigger>
+              <DialogContent
+                className="sm:max-w-[425px]"
+                onInteractOutside={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                <DialogHeader>
+                  <DialogTitle>
+                    Attend Event: {selectedEvent?.title}
+                  </DialogTitle>
+                </DialogHeader>
+                {selectedEvent && (
+                  <AttendanceForm
+                    event={selectedEvent}
+                    onClose={() => setSelectedEvent(null)}
+                  />
+                )}
+              </DialogContent>
+            </Dialog>
           </CardFooter>
         </Card>
       ))}

@@ -19,7 +19,7 @@ export const EventTabs: React.FC = () => {
         <TabsTrigger value="past" className=" py-4">
           Past Events
         </TabsTrigger>
-        <TabsTrigger value="my" className=" py-4">
+        <TabsTrigger value="my-events" className=" py-4">
           My Events
         </TabsTrigger>
       </TabsList>
@@ -29,9 +29,7 @@ export const EventTabs: React.FC = () => {
       <TabsContent value="past">
         <EventList />
       </TabsContent>
-      <TabsContent value="my">
-        <EventList />
-      </TabsContent>
+      <TabsContent value="my-events">{/* <EventList /> */}</TabsContent>
     </Tabs>
   );
 };
