@@ -7,29 +7,30 @@ export const EventTabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
 
   return (
-    <Tabs
-      value={activeTab}
-      onValueChange={setActiveTab}
-      className="w-full mb-6"
-    >
-      <TabsList className="grid w-full h-full grid-cols-3 mb-10">
-        <TabsTrigger value="upcoming" className="py-4">
-          Upcoming Events
-        </TabsTrigger>
-        <TabsTrigger value="past" className=" py-4">
-          Past Events
-        </TabsTrigger>
-        <TabsTrigger value="my-events" className=" py-4">
-          My Events
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="upcoming">
-        <EventList />
-      </TabsContent>
-      <TabsContent value="past">
-        <EventList />
-      </TabsContent>
-      <TabsContent value="my-events">{/* <EventList /> */}</TabsContent>
-    </Tabs>
+    // <Tabs
+    //   value={activeTab}
+    //   onValueChange={setActiveTab}
+    //   className="w-full mb-6"
+    // >
+    //   <TabsList className="grid w-full h-full grid-cols-3 mb-10">
+    //     <TabsTrigger value="upcoming" className="py-4">
+    //       Upcoming Events
+    //     </TabsTrigger>
+    //     <TabsTrigger value="past" className=" py-4">
+    //       Past Events
+    //     </TabsTrigger>
+    //     <TabsTrigger value="my-events" className=" py-4">
+    //       My Events
+    //     </TabsTrigger>
+    //   </TabsList>
+    //   <TabsContent value="upcoming">
+    //     <EventList />
+    //   </TabsContent>
+    //   <TabsContent value="past">
+    //     <EventList />
+    //   </TabsContent>
+    //   <TabsContent value="my-events">{/* <EventList /> */}</TabsContent>
+    // </Tabs>
+    <EventList />
   );
 };

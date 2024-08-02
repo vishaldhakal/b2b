@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -157,7 +157,7 @@ export const MultiStepForm: React.FC<{ onClose: () => void }> = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={(e) => e.preventDefault()} className="space-y-4 p-6">
+      <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
         <h2 className="text-lg font-semibold">{steps[step].title}</h2>
         <CurrentStep form={form} />
         <div className="flex justify-between mt-6">

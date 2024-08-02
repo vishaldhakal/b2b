@@ -30,151 +30,41 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { MultiStepForm } from "./multi-step-form/AttendDialog";
-interface Event {
+
+export interface Event {
   id: number;
   title: string;
   thumbnail?: string;
-  date: string;
+  startDate: string;
+  endDate: string;
   location: string;
   attendees: number;
   type: string;
+  description: string;
+  organizer: string;
+  ticketPrice: string;
+  website: string;
+  tags: string[];
 }
 
 const mockEvents: Event[] = [
   {
-    id: 1,
-    title: "Nepal Tech Summit 2024",
+    id: parseInt("34"),
+    title: "Birat Expo 2024",
     thumbnail: "/13.png",
-    date: "Aug 15, 2024",
-    location: "Kathmandu",
-    attendees: 500,
+    startDate: "Dec 21, 2024",
+    endDate: "Dec 31, 2024",
+    location: "Bhrikutimandap, Kathmandu",
+    attendees: 300000,
     type: "Technology",
-  },
-  {
-    id: 2,
-    title: "Agricultural Innovation Expo",
-    date: "Sep 5, 2024",
-    thumbnail: "/13.png",
-    location: "Pokhara",
-    attendees: 300,
-    type: "Agriculture",
-  },
-  {
-    id: 3,
-    title: "Himalayan Business Network Meet",
-    date: "Oct 10, 2024",
-    location: "Biratnagar",
-    thumbnail: "/13.png",
-    attendees: 200,
-    type: "Networking",
-  },
-  {
-    id: 4,
-    title: "Sustainable Tourism Conference",
-    date: "Nov 20, 2024",
-    thumbnail: "/13.png",
-    location: "Chitwan",
-    attendees: 250,
-    type: "Tourism",
+    description:
+      "Nepal's largest technology and innovation expo showcasing the latest advancements in AI, robotics, and sustainable tech.",
+    organizer: "Tech Nepal Association",
+    ticketPrice: "NPR 500",
+    website: "https://biratexpo2024.com",
+    tags: ["AI", "Robotics", "Green Tech", "Startups"],
   },
 ];
-const schema = yup.object().shape({
-  name: yup.string().required("Name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
-  company: yup.string().required("Company name is required"),
-  position: yup.string().required("Position is required"),
-  phone: yup.string().required("Phone number is required"),
-});
-
-type FormData = yup.InferType<typeof schema>;
-
-const AttendanceForm: React.FC<{ event: Event; onClose: () => void }> = ({
-  event,
-  onClose,
-}) => {
-  const form = useForm<FormData>({
-    resolver: yupResolver(schema),
-  });
-
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    // Here you would typically send the data to your backend
-    onClose();
-  };
-
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Your full name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="Your email address" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="company"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Company</FormLabel>
-              <FormControl>
-                <Input placeholder="Your company name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="position"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Position</FormLabel>
-              <FormControl>
-                <Input placeholder="Your position" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone</FormLabel>
-              <FormControl>
-                <Input placeholder="Your phone number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
-  );
-};
 
 export const EventList: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = React.useState<Event | null>(null);
@@ -196,7 +86,9 @@ export const EventList: React.FC = () => {
           <CardContent>
             <div className="flex items-center text-gray-600 mb-2">
               <Calendar className="w-4 h-4 mr-2" />
-              <span>{event.date}</span>
+              <span>{event.startDate}</span>
+              <span className="mx-2">to</span>
+              <span>{event.endDate}</span>
             </div>
             <div className="flex items-center text-gray-600 mb-2">
               <MapPin className="w-4 h-4 mr-2" />
