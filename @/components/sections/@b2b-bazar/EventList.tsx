@@ -218,21 +218,21 @@ export const EventList: React.FC = () => {
                   Attend this event
                 </Button>
               </DialogTrigger>
-              <DialogContent
-                className="sm:max-w-2xl"
-                onInteractOutside={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                <DialogHeader>
-                  <DialogTitle>
-                    Attend Event: {selectedEvent?.title}
-                  </DialogTitle>
-                </DialogHeader>
-                {selectedEvent && (
+              {selectedEvent && (
+                <DialogContent
+                  className="sm:max-w-2xl"
+                  onInteractOutside={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <DialogHeader>
+                    <DialogTitle>
+                      Attend Event: {selectedEvent?.title}
+                    </DialogTitle>
+                  </DialogHeader>
                   <MultiStepForm onClose={() => setSelectedEvent(null)} />
-                )}
-              </DialogContent>
+                </DialogContent>
+              )}
             </Dialog>
           </CardFooter>
         </Card>
