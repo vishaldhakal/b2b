@@ -40,9 +40,10 @@ const Navbar = () => {
       subtitle: "Join Networking Events",
     },
     { href: "/wish-and-offers", label: "Wish & Offers" },
-    { href: "/business-clinic", label: "Business Clinic" },
-    { href: "/training", label: "Training" },
-    { href: "/fundraising", label: "Fundraising" },
+    // { href: "/business-clinic", label: "Business Clinic" },
+    { href: "/vocational-training", label: "Vocational Training" },
+    { href: "/agricultural-training", label: "Agricultural Training" },
+    // { href: "/fundraising", label: "Fundraising" },
     { href: "/job-board", label: "Jobs" },
   ];
 
@@ -52,8 +53,8 @@ const Navbar = () => {
         <nav className="flex items-center justify-between h-16 lg:h-20">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <h1 className="font-extrabold text-3xl lg:text-4xl">
-                b2bbazzar<span className="text-yellow-500">.</span>
+              <h1 className="font-extrabold text-2xl lg:text-3xl">
+                BiratazzarB2B<span className="text-yellow-500">.</span>
               </h1>
             </Link>
           </div>
@@ -90,7 +91,7 @@ const Navbar = () => {
                   b2bbazzar<span className="text-yellow-400">.</span>
                 </SheetTitle>
               </SheetHeader>
-              <div className="mt-6 flex flex-col space-y-4">
+              <div className="mt-6 flex flex-col items-end space-y-4">
                 {navItems.map((item) => (
                   <NavLink key={item.href} href={item.href}>
                     {item.label}

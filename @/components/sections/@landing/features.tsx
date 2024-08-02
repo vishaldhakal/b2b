@@ -45,11 +45,11 @@ const features = [
     description: "Streamline your operations",
     icon: TrendingUp,
   },
-  {
-    title: "Business Clinic",
-    description: "Get expert advice and coaching",
-    icon: Briefcase,
-  },
+  // {
+  //   title: "Business Clinic",
+  //   description: "Get expert advice and coaching",
+  //   icon: Briefcase,
+  // },
   {
     title: "Vocational Training",
     description: "Enhance your skills",
@@ -65,11 +65,11 @@ const features = [
     description: "Connect with businesses in your area",
     icon: Users,
   },
-  {
-    title: "Fundraising",
-    description: "Seek investments for your business",
-    icon: DollarSign,
-  },
+  // {
+  //   title: "Fundraising",
+  //   description: "Seek investments for your business",
+  //   icon: DollarSign,
+  // },
   {
     title: "Job Board",
     description: "Find talent or your next opportunity",
@@ -79,7 +79,7 @@ const features = [
 
 const FeaturesSection = () => (
   <section className="py-12">
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {features.map((feature) => (
         <FeatureCard
           key={feature.title}
