@@ -1,5 +1,12 @@
 import React from "react";
-import { MapPin, Clock, Eye, ThumbsUp, AlertCircle } from "lucide-react";
+import {
+  MapPin,
+  Clock,
+  Eye,
+  ThumbsUp,
+  AlertCircle,
+  CheckCircle,
+} from "lucide-react";
 import {
   Card,
   CardContent,
@@ -35,6 +42,12 @@ const yourWishes = [
         postedAt: "1 day ago",
         views: 45,
         interested: 3,
+        matchPercentage: 95,
+        matchedAttributes: {
+          category: true,
+          location: true,
+          skills: ["React", "Node.js", "MongoDB"],
+        },
       },
       {
         id: 2,
@@ -44,6 +57,12 @@ const yourWishes = [
         postedAt: "3 days ago",
         views: 62,
         interested: 4,
+        matchPercentage: 80,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Shopify", "WooCommerce"],
+        },
       },
       {
         id: 3,
@@ -53,55 +72,65 @@ const yourWishes = [
         postedAt: "1 week ago",
         views: 89,
         interested: 6,
+        matchPercentage: 75,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["JavaScript", "Python", "SQL"],
+        },
       },
     ],
   },
-  {
-    id: 2,
-    title: "Supplier of Organic Tea Leaves",
-    category: "Agriculture",
-    location: "Ilam",
-    postedAt: "1 week ago",
-    views: 120,
-    interested: 8,
-    matches: [
-      {
-        id: 1,
-        title: "Organic Tea Wholesaler",
-        category: "Agriculture",
-        location: "Ilam",
-        postedAt: "5 days ago",
-        views: 75,
-        interested: 5,
-      },
-      {
-        id: 2,
-        title: "Tea Plantation Owner Offering Premium Leaves",
-        category: "Agriculture",
-        location: "Dhankuta",
-        postedAt: "2 weeks ago",
-        views: 110,
-        interested: 7,
-      },
-    ],
-  },
+  // ... (other wishes)
 ];
 
 const MatchItem = ({ match }) => (
-  <Card key={match.id} className="mb-4">
+  <Card key={match.id} className="mb-4 ">
     <CardHeader>
       <div className="flex justify-between items-start">
         <div>
-          <CardTitle>{match.title}</CardTitle>
-          <p className="text-sm text-gray-600">{match.category}</p>
+          <CardTitle className="flex items-center">
+            {match.title}
+            <Badge
+              variant="outline"
+              className="ml-2 bg-green-100 text-green-800"
+            >
+              {match.matchPercentage}% Match
+            </Badge>
+          </CardTitle>
+          <p
+            className={`text-sm ${
+              match.matchedAttributes.category
+                ? "text-green-600 font-semibold"
+                : "text-gray-600"
+            }`}
+          >
+            {match.matchedAttributes.category && (
+              <CheckCircle className="w-4 h-4 inline mr-1" />
+            )}
+            {match.category}
+          </p>
         </div>
         <Badge variant="secondary">Offer</Badge>
       </div>
     </CardHeader>
     <CardContent>
-      <div className="flex items-center text-sm text-gray-500 mb-4">
-        <MapPin className="w-4 h-4 mr-1" /> {match.location}
-        <Clock className="w-4 h-4 ml-4 mr-1" /> Posted {match.postedAt}
+      <div className="flex items-center text-sm mb-4">
+        <span
+          className={`flex items-center ${
+            match.matchedAttributes.location
+              ? "text-green-600 font-semibold"
+              : "text-gray-500"
+          }`}
+        >
+          {match.matchedAttributes.location && (
+            <CheckCircle className="w-4 h-4 inline mr-1" />
+          )}
+          <MapPin className="w-4 h-4 mr-1" /> {match.location}
+        </span>
+        <span className="flex items-center text-gray-500 ml-4">
+          <Clock className="w-4 h-4 mr-1" /> Posted {match.postedAt}
+        </span>
       </div>
       <div className="flex justify-between items-center">
         <div className="flex items-center space-x-4">
@@ -113,6 +142,24 @@ const MatchItem = ({ match }) => (
           </span>
         </div>
       </div>
+      {match.matchedAttributes.skills && (
+        <div className="mt-2">
+          <p className="text-sm font-semibold text-green-600">
+            Matched Skills:
+          </p>
+          <div className="flex flex-wrap gap-1 mt-1">
+            {match.matchedAttributes.skills.map((skill, index) => (
+              <Badge
+                key={index}
+                variant="outline"
+                className="bg-green-50 text-green-700 border-green-200"
+              >
+                {skill}
+              </Badge>
+            ))}
+          </div>
+        </div>
+      )}
     </CardContent>
     <CardFooter>
       <Button>Contact Offerer</Button>

@@ -29,6 +29,7 @@ import { Input } from "../../../components/ui/input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { MultiStepForm } from "./multi-step-form/AttendDialog";
 interface Event {
   id: number;
   title: string;
@@ -218,7 +219,7 @@ export const EventList: React.FC = () => {
                 </Button>
               </DialogTrigger>
               <DialogContent
-                className="sm:max-w-[425px]"
+                className="sm:max-w-2xl"
                 onInteractOutside={(e) => {
                   e.preventDefault();
                 }}
@@ -229,10 +230,7 @@ export const EventList: React.FC = () => {
                   </DialogTitle>
                 </DialogHeader>
                 {selectedEvent && (
-                  <AttendanceForm
-                    event={selectedEvent}
-                    onClose={() => setSelectedEvent(null)}
-                  />
+                  <MultiStepForm onClose={() => setSelectedEvent(null)} />
                 )}
               </DialogContent>
             </Dialog>
