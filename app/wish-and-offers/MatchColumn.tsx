@@ -47,48 +47,27 @@ const MatchItem = ({ match, type }) => (
           </div>
         )}
         <div className="ml-4 flex-grow">
-          {match.matchedAttributes ? (
-            <>
-              <h4 className="text-sm font-semibold text-green-700 mb-1">
-                Matched Attributes:
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {Object.entries(match.matchedAttributes).map(
-                  ([key, value]) =>
-                    value && (
-                      <Badge
-                        key={key}
-                        variant="secondary"
-                        className="bg-green-100 text-green-700"
-                      >
-                        {key}
-                      </Badge>
-                    )
-                )}
-                {match.matchedAttributes.skills &&
-                  match.matchedAttributes.skills.map((skill, index) => (
-                    <Badge
-                      key={index}
-                      variant="secondary"
-                      className="bg-green-100 text-green-700"
-                    >
-                      {skill}
+          <>
+            <h4 className="text-sm font-semibold text-green-700 mb-1">
+              Matched Attributes:
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(match.matchedAttributes).map(
+                ([key, value]) =>
+                  value && (
+                    <Badge key={key} variant="outline" className="">
+                      {key}
                     </Badge>
-                  ))}
-              </div>
-            </>
-          ) : (
-            <div className="text-sm text-green-700">
-              <p className="mb-1">
-                <MapPin className="w-4 h-4 inline mr-1" />
-                {match.location}
-              </p>
-              <p>
-                <Clock className="w-4 h-4 inline mr-1" />
-                Posted {match.postedAt}
-              </p>
+                  )
+              )}
+              {match.matchedAttributes.skills &&
+                match.matchedAttributes.skills.map((skill, index) => (
+                  <Badge key={index} variant="outline" className="">
+                    {skill}
+                  </Badge>
+                ))}
             </div>
-          )}
+          </>
         </div>
       </div>
     </CardContent>
@@ -126,7 +105,7 @@ export const MatchColumn = ({ selectedItem, className }) => (
     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-200 rounded-full px-6 py-2 z-10">
       <h2 className="font-semibold text-green-800">Matches</h2>
     </div>
-    <Card className="pt-8 max-h-[calc(100vh-200px)] overflow-y-auto">
+    <div className="pt-8 max-h-[calc(100vh-200px)] overflow-y-auto">
       <CardContent>
         {selectedItem ? (
           <>
@@ -145,6 +124,6 @@ export const MatchColumn = ({ selectedItem, className }) => (
           </p>
         )}
       </CardContent>
-    </Card>
+    </div>
   </div>
 );
