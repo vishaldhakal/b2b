@@ -1,14 +1,27 @@
-import HeroBanner from "./HeroBanner";
-import EventContent from "./EventContent";
-import EnquiryForm from "./EnquiryForm";
-import B2BEvents from "./B2BEvents";
-import DistrictEvents from "./DistrictEvents";
-import { Event } from "./types";
+import React from "react";
+import {
+  Calendar,
+  MapPin,
+  Users,
+  ArrowRight,
+  Building2,
+  MapPinned,
+} from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../../components/ui/card";
+import Image from "next/image";
+import { Badge } from "../../../components/ui/badge";
+import Link from "next/link";
+import { Event } from "../../../../app/b2b-bazaar/[slug]/types";
 
-async function getEventData(id: string): Promise<Event> {
-  // Mock data
-  return {
-    id: parseInt(id),
+const mockEvents: Event[] = [
+  {
+    id: parseInt("34"),
     title: "Birat Expo 2024",
     slug: "birat-expo-2024",
     thumbnail: "/13.png",
@@ -149,34 +162,72 @@ async function getEventData(id: string): Promise<Event> {
           "Concluding the Koshi Province tour: Birat Expo in Udayapur.",
       },
     ],
-  };
-}
+  },
+];
 
-export default async function EventPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const event = await getEventData(params.id);
-
+export const WishOffersEventList: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <HeroBanner event={event} />
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="lg:w-2/3 space-y-8">
-            <EventContent event={event} />
-            <B2BEvents events={event.b2bEvents} mainEventTitle={event.title} />
-            <DistrictEvents
-              events={event.districtEvents}
-              mainEventTitle={event.title}
-            />
-          </div>
-          <div className="lg:w-1/3">
-            <EnquiryForm eventId={event.id} />
-          </div>
-        </div>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {mockEvents.map((event) => (
+        <Link href={`/wish-and-offers/${event.slug}`} key={event.id}>
+          <Card
+            className="border border-gray-200 rounded-lg overflow-hidden
+            hover:scaled hover:shadow-lg hover:-translate-y-1 transition-all duration-300
+          p-2 cursor-pointer h-full flex flex-col"
+          >
+            <CardHeader className="p-0">
+              <div className="relative h-48 w-full">
+                <Image
+                  src={event.thumbnail || "/placeholder.png"}
+                  alt={event.title}
+                  layout="fill"
+                  objectFit="cover"
+                />
+                <div className="absolute top-2 right-2">
+                  <Badge variant="secondary" className="bg-white text-gray-800">
+                    {event.type}
+                  </Badge>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-4 flex-grow">
+              <CardTitle className="text-xl font-bold mb-3 text-gray-800">
+                {event.title}
+              </CardTitle>
+              <div className="space-y-2 text-sm text-gray-600">
+                <div className="flex items-center">
+                  <Calendar className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                  <span>
+                    {event.startDate} - {event.endDate}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                  <span>{event.location}</span>
+                </div>
+                <div className="flex items-center">
+                  <Users className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                  <span>{event.attendees.toLocaleString()} Attendees</span>
+                </div>
+                <div className="flex items-center">
+                  <Building2 className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                  <span>{event.b2bEvents.length} Sub-events</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPinned className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                  <span>{event.districtEvents.length} District events</span>
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter className="p-4 bg-gray-50 flex justify-between items-center">
+              <span className="text-sm font-medium text-gray-600">
+                View Details
+              </span>
+              <ArrowRight className="w-4 h-4 text-blue-500 transition-transform group-hover:translate-x-1" />
+            </CardFooter>
+          </Card>
+        </Link>
+      ))}
     </div>
   );
-}
+};

@@ -15,7 +15,6 @@ import {
   CardTitle,
 } from "../../../components/ui/card";
 import Image from "next/image";
-import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import Link from "next/link";
 import { Event } from "../../../../app/b2b-bazaar/[slug]/types";
@@ -24,6 +23,7 @@ const mockEvents: Event[] = [
   {
     id: parseInt("34"),
     title: "Birat Expo 2024",
+    slug: "birat-expo-2024",
     thumbnail: "/13.png",
     startDate: "Dec 21, 2024",
     endDate: "Dec 31, 2024",
@@ -169,7 +169,7 @@ export const EventList: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {mockEvents.map((event) => (
-        <Link href={`/b2b-bazaar/${event.id}`} key={event.id}>
+        <Link href={`/b2b-bazaar/${event.slug}`} key={event.id}>
           <Card
             className="border border-gray-200 rounded-lg overflow-hidden
             hover:scaled hover:shadow-lg hover:-translate-y-1 transition-all duration-300

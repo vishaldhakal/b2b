@@ -81,7 +81,73 @@ const yourWishes = [
       },
     ],
   },
-  // ... (other wishes)
+  {
+    id: 2,
+    title: "Graphic Designer for Logo Design",
+    category: "Design & Creative",
+    location: "Pokhara",
+    postedAt: "1 week ago",
+    views: 45,
+    interested: 3,
+    matches: [
+      {
+        id: 1,
+        title: "Logo Design Expert Available",
+        category: "Design & Creative",
+        location: "Pokhara",
+        postedAt: "3 days ago",
+        views: 32,
+        interested: 2,
+        matchPercentage: 90,
+        matchedAttributes: {
+          category: true,
+          location: true,
+          skills: ["Adobe Illustrator", "Photoshop"],
+        },
+      },
+      {
+        id: 2,
+        title: "Freelance Graphic Designer for Hire",
+        category: "Design & Creative",
+        location: "Kathmandu",
+        postedAt: "2 weeks ago",
+        views: 56,
+        interested: 4,
+        matchPercentage: 85,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Figma", "InDesign"],
+        },
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Content Writer for Blog Posts",
+    category: "Writing & Translation",
+    location: "Biratnagar",
+    postedAt: "3 weeks ago",
+    views: 32,
+    interested: 2,
+    matches: [
+      {
+        id: 1,
+        title: "Professional Content Writer Available",
+        category: "Writing & Translation",
+        location: "Biratnagar",
+        postedAt: "2 weeks ago",
+        views: 23,
+        interested: 1,
+        matchPercentage: 85,
+        matchedAttributes: {
+          category: true,
+          location: true,
+          skills: ["SEO", "Copywriting"],
+        },
+      },
+    ],
+  },
 ];
 
 const MatchItem = ({ match }) => (
@@ -227,7 +293,7 @@ export const YourWishes: React.FC = () => (
     <div className="absolute top-0 left-1/2 border border-gray-300 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded-full px-6 py-2  z-10">
       <h2 className="font-semibold">Your Wishes</h2>
     </div>
-    <Card className="pt-8">
+    <Card className="pt-8 max-h-[660px] overflow-scroll">
       <CardContent>
         {yourWishes.map((wish) => (
           <WishItem key={wish.id} wish={wish} />

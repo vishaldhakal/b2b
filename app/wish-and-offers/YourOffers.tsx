@@ -85,6 +85,93 @@ const yourOffers = [
       },
     ],
   },
+  {
+    id: 3,
+    title: "Nepali Handicrafts Exporter",
+    category: "Handicrafts",
+    location: "Kathmandu",
+    postedAt: "1 week ago",
+    views: 80,
+    interested: 5,
+    matches: [
+      {
+        id: 1,
+        title: "Seeking Handicrafts Supplier",
+        category: "Handicrafts",
+        location: "Pokhara",
+        postedAt: "4 days ago",
+        views: 55,
+        interested: 3,
+      },
+      {
+        id: 2,
+        title: "Handicrafts Buyer for Wholesale",
+        category: "Handicrafts",
+        location: "Biratnagar",
+        postedAt: "1 week ago",
+        views: 90,
+        interested: 6,
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Nepali Coffee Beans Exporter",
+    category: "Agriculture",
+    location: "Pokhara",
+    postedAt: "2 weeks ago",
+    views: 100,
+    interested: 8,
+    matches: [
+      {
+        id: 1,
+        title: "Seeking Nepali Coffee Beans Supplier",
+        category: "Agriculture",
+        location: "Kathmandu",
+        postedAt: "1 week ago",
+        views: 70,
+        interested: 5,
+      },
+      {
+        id: 2,
+        title: "Coffee Roaster for Wholesale",
+        category: "Agriculture",
+        location: "Birgunj",
+        postedAt: "2 weeks ago",
+        views: 95,
+        interested: 7,
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "Nepali Woolen Garments Exporter",
+    category: "Textiles",
+    location: "Biratnagar",
+    postedAt: "3 weeks ago",
+    views: 120,
+    interested: 10,
+    matches: [
+      {
+        id: 1,
+        title: "Seeking Woolen Garments Supplier",
+        category: "Textiles",
+        location: "Kathmandu",
+        postedAt: "2 weeks ago",
+        views: 80,
+        interested: 6,
+      },
+      {
+        id: 2,
+        title: "Garments Buyer for Wholesale",
+        category: "Textiles",
+        location: "Pokhara",
+        postedAt: "3 weeks ago",
+        views: 110,
+        interested: 9,
+      },
+    ],
+  },
 ];
 
 const MatchItem = ({ match }) => (
@@ -180,7 +267,7 @@ export const YourOffers: React.FC = () => (
     <div className="absolute top-0 left-1/2 border border-gray-300 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded-full px-6 py-2  z-10">
       <h2 className="font-semibold">Your Offers</h2>
     </div>
-    <Card className="pt-8">
+    <Card className="pt-8 max-h-[660px] overflow-scroll">
       <CardContent>
         {yourOffers.map((offer) => (
           <OfferItem key={offer.id} offer={offer} />

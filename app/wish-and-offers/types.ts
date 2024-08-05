@@ -26,3 +26,44 @@ export const postFormSchema = yup.object().shape({
     .max(500, "Description must be 500 characters or less"),
   location: yup.string().required("Location is required"),
 });
+
+// types.ts
+export interface Wish {
+  id: string;
+  userId: string;
+  userName: string;
+  title: string;
+  description: string;
+  category: string;
+}
+
+export interface Offer {
+  id: string;
+  userId: string;
+  userName: string;
+  title: string;
+  description: string;
+  category: string;
+}
+
+// mockData.ts
+
+export const mockWishes: Wish[] = [
+  {
+    id: "1",
+    userId: "user1",
+    userName: "John Doe",
+    title: "Looking for IT support",
+    description: "Need help with network setup for small office",
+    category: "IT Services",
+  },
+  {
+    id: "2",
+    userId: "user2",
+    userName: "Jane Smith",
+    title: "Seeking marketing consultant",
+    description: "Require assistance with digital marketing strategy",
+    category: "Marketing",
+  },
+  // Add more mock wishes as needed
+];

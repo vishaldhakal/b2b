@@ -18,6 +18,7 @@ export interface DistrictEvent {
 
 export interface Event {
   id: number;
+  slug: string;
   title: string;
   thumbnail: string;
   startDate: string;
