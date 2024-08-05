@@ -151,7 +151,7 @@ const yourWishes = [
 ];
 
 const MatchItem = ({ match }) => (
-  <Card key={match.id} className="mb-4 ">
+  <Card key={match.id} className="mb-4">
     <CardHeader>
       <div className="flex justify-between items-start">
         <div>
@@ -177,39 +177,11 @@ const MatchItem = ({ match }) => (
             {match.category}
           </p>
         </div>
-        <Badge variant="secondary">Offer</Badge>
       </div>
     </CardHeader>
     <CardContent>
-      <div className="flex items-center text-sm mb-4">
-        <span
-          className={`flex items-center ${
-            match.matchedAttributes.location
-              ? "text-green-600 font-semibold"
-              : "text-gray-500"
-          }`}
-        >
-          {match.matchedAttributes.location && (
-            <CheckCircle className="w-4 h-4 inline mr-1" />
-          )}
-          <MapPin className="w-4 h-4 mr-1" /> {match.location}
-        </span>
-        <span className="flex items-center text-gray-500 ml-4">
-          <Clock className="w-4 h-4 mr-1" /> Posted {match.postedAt}
-        </span>
-      </div>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <span className="flex items-center text-sm text-gray-500">
-            <Eye className="w-4 h-4 mr-1" /> {match.views} views
-          </span>
-          <span className="flex items-center text-sm text-gray-500">
-            <ThumbsUp className="w-4 h-4 mr-1" /> {match.interested} interested
-          </span>
-        </div>
-      </div>
       {match.matchedAttributes.skills && (
-        <div className="mt-2">
+        <div>
           <p className="text-sm font-semibold text-green-600">
             Matched Skills:
           </p>
@@ -233,10 +205,28 @@ const MatchItem = ({ match }) => (
   </Card>
 );
 
-const MatchesDialog = ({ wish }) => (
+const WishItem = ({ wish }) => (
   <Dialog>
     <DialogTrigger asChild>
-      <Button variant="outline">View Matches</Button>
+      <Card
+        key={wish.id}
+        className="mb-4 cursor-pointer hover:shadow-md transition-shadow"
+      >
+        <CardHeader>
+          <div className="flex justify-between items-center">
+            <div>
+              <CardTitle className="text-xl">{wish.title}</CardTitle>
+              <p className="text-base text-gray-600">{wish.category}</p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span className="flex items-center text-xl text-green-600 font-semibold">
+                <AlertCircle className="w-4 h-4 mr-1" /> {wish.matches.length}{" "}
+                matches
+              </span>
+            </div>
+          </div>
+        </CardHeader>
+      </Card>
     </DialogTrigger>
     <DialogContent className="sm:max-w-[600px]">
       <DialogHeader>
@@ -251,46 +241,9 @@ const MatchesDialog = ({ wish }) => (
   </Dialog>
 );
 
-const WishItem = ({ wish }) => (
-  <Card key={wish.id} className="mb-4">
-    <CardHeader>
-      <div className="flex justify-between items-start">
-        <div>
-          <CardTitle>{wish.title}</CardTitle>
-          <p className="text-sm text-gray-600">{wish.category}</p>
-        </div>
-        <Badge variant="secondary">Wish</Badge>
-      </div>
-    </CardHeader>
-    <CardContent>
-      <div className="flex items-center text-sm text-gray-500 mb-4">
-        <MapPin className="w-4 h-4 mr-1" /> {wish.location}
-        <Clock className="w-4 h-4 ml-4 mr-1" /> Posted {wish.postedAt}
-      </div>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <span className="flex items-center text-sm text-gray-500">
-            <Eye className="w-4 h-4 mr-1" /> {wish.views} views
-          </span>
-          <span className="flex items-center text-sm text-gray-500">
-            <ThumbsUp className="w-4 h-4 mr-1" /> {wish.interested} interested
-          </span>
-          <span className="flex items-center text-sm text-green-600 font-semibold">
-            <AlertCircle className="w-4 h-4 mr-1" /> {wish.matches.length}{" "}
-            matches
-          </span>
-        </div>
-      </div>
-    </CardContent>
-    <CardFooter>
-      <MatchesDialog wish={wish} />
-    </CardFooter>
-  </Card>
-);
-
 export const YourWishes: React.FC = () => (
   <div className="relative">
-    <div className="absolute top-0 left-1/2 border border-gray-300 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded-full px-6 py-2  z-10">
+    <div className="absolute top-0 left-1/2 border border-gray-300 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded-full px-6 py-2 z-10">
       <h2 className="font-semibold">Your Wishes</h2>
     </div>
     <Card className="pt-8 max-h-[660px] overflow-scroll">

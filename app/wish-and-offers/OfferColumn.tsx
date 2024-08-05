@@ -1,21 +1,11 @@
 import React from "react";
-import { MapPin, Clock, Eye, ThumbsUp, AlertCircle } from "lucide-react";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-  CardFooter,
 } from "../../@/components/ui/card";
-import { Button } from "../../@/components/ui/button";
-import { Badge } from "../../@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../../@/components/ui/dialog";
+import { AlertCircle } from "lucide-react";
 
 const yourOffers = [
   {
@@ -23,6 +13,7 @@ const yourOffers = [
     title: "Handmade Pashmina Shawls Wholesale",
     category: "Textiles",
     location: "Kathmandu",
+    type: "Offer",
     postedAt: "3 days ago",
     views: 95,
     interested: 7,
@@ -35,6 +26,12 @@ const yourOffers = [
         postedAt: "1 day ago",
         views: 50,
         interested: 3,
+        matchPercentage: 90,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Handmade", "Wholesale"],
+        },
       },
       {
         id: 2,
@@ -44,6 +41,12 @@ const yourOffers = [
         postedAt: "4 days ago",
         views: 75,
         interested: 5,
+        matchPercentage: 85,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Wholesale", "Pashmina"],
+        },
       },
       {
         id: 3,
@@ -53,6 +56,12 @@ const yourOffers = [
         postedAt: "1 week ago",
         views: 120,
         interested: 8,
+        matchPercentage: 95,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Nepali", "Pashmina", "Wholesale"],
+        },
       },
       {
         id: 4,
@@ -62,6 +71,12 @@ const yourOffers = [
         postedAt: "2 days ago",
         views: 85,
         interested: 6,
+        matchPercentage: 88,
+        matchedAttributes: {
+          category: true,
+          location: true,
+          skills: ["Pashmina", "Import"],
+        },
       },
     ],
   },
@@ -70,6 +85,7 @@ const yourOffers = [
     title: "Nepali Spice Export Services",
     category: "Food & Beverage",
     location: "Birgunj",
+    type: "Offer",
     postedAt: "5 days ago",
     views: 110,
     interested: 6,
@@ -82,6 +98,12 @@ const yourOffers = [
         postedAt: "3 days ago",
         views: 65,
         interested: 4,
+        matchPercentage: 92,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Nepali Spices", "Export"],
+        },
       },
     ],
   },
@@ -90,6 +112,7 @@ const yourOffers = [
     title: "Nepali Handicrafts Exporter",
     category: "Handicrafts",
     location: "Kathmandu",
+    type: "Offer",
     postedAt: "1 week ago",
     views: 80,
     interested: 5,
@@ -102,6 +125,12 @@ const yourOffers = [
         postedAt: "4 days ago",
         views: 55,
         interested: 3,
+        matchPercentage: 88,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Nepali Handicrafts", "Export"],
+        },
       },
       {
         id: 2,
@@ -111,6 +140,12 @@ const yourOffers = [
         postedAt: "1 week ago",
         views: 90,
         interested: 6,
+        matchPercentage: 85,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Wholesale", "Handicrafts"],
+        },
       },
     ],
   },
@@ -119,6 +154,7 @@ const yourOffers = [
     title: "Nepali Coffee Beans Exporter",
     category: "Agriculture",
     location: "Pokhara",
+    type: "Offer",
     postedAt: "2 weeks ago",
     views: 100,
     interested: 8,
@@ -131,6 +167,12 @@ const yourOffers = [
         postedAt: "1 week ago",
         views: 70,
         interested: 5,
+        matchPercentage: 93,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Nepali Coffee", "Export"],
+        },
       },
       {
         id: 2,
@@ -140,6 +182,12 @@ const yourOffers = [
         postedAt: "2 weeks ago",
         views: 95,
         interested: 7,
+        matchPercentage: 87,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Coffee Roasting", "Wholesale"],
+        },
       },
     ],
   },
@@ -147,6 +195,7 @@ const yourOffers = [
     id: 5,
     title: "Nepali Woolen Garments Exporter",
     category: "Textiles",
+    type: "Offer",
     location: "Biratnagar",
     postedAt: "3 weeks ago",
     views: 120,
@@ -160,6 +209,12 @@ const yourOffers = [
         postedAt: "2 weeks ago",
         views: 80,
         interested: 6,
+        matchPercentage: 91,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Woolen Garments", "Export"],
+        },
       },
       {
         id: 2,
@@ -169,91 +224,49 @@ const yourOffers = [
         postedAt: "3 weeks ago",
         views: 110,
         interested: 9,
+        matchPercentage: 89,
+        matchedAttributes: {
+          category: true,
+          location: false,
+          skills: ["Wholesale", "Garments"],
+        },
       },
     ],
   },
 ];
-
-const MatchItem = ({ match }) => (
-  <Card key={match.id} className="mb-4">
+const OfferItem = ({ offer, onClick }) => (
+  <Card
+    className="mb-4 cursor-pointer hover:shadow-md transition-shadow"
+    onClick={() => onClick(offer)}
+  >
     <CardHeader>
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-center">
         <div>
-          <CardTitle>{match.title}</CardTitle>
-          <p className="text-sm text-gray-600">{match.category}</p>
+          <CardTitle className="">{offer.title}</CardTitle>
+          <p className="text-m text-gray-600">{offer.category}</p>
         </div>
-        <Badge variant="secondary">Wish</Badge>
+      </div>
+      <div className="flex items-center">
+        <span className="flex items-center text-sm text-green-600 font-semibold">
+          <AlertCircle className="w-4 h-4 mr-1" /> {offer.matches.length}{" "}
+          matches
+        </span>
       </div>
     </CardHeader>
-    <CardContent>
-      <div className="flex items-center text-sm text-gray-500 mb-4">
-        <MapPin className="w-4 h-4 mr-1" /> {match.location}
-        <Clock className="w-4 h-4 ml-4 mr-1" /> Posted {match.postedAt}
-      </div>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <span className="flex items-center text-sm text-gray-500">
-            <Eye className="w-4 h-4 mr-1" /> {match.views} views
-          </span>
-          <span className="flex items-center text-sm text-gray-500">
-            <ThumbsUp className="w-4 h-4 mr-1" /> {match.interested} interested
-          </span>
-        </div>
-      </div>
-    </CardContent>
-    <CardFooter>
-      <Button>Contact Wisher</Button>
-    </CardFooter>
   </Card>
 );
 
-const OfferItem = ({ offer }) => (
-  <Dialog>
-    <DialogTrigger asChild>
-      <Card
-        key={offer.id}
-        className="mb-4 cursor-pointer hover:shadow-md transition-shadow"
-      >
-        <CardHeader>
-          <div className="flex justify-between items-center">
-            <div>
-              <CardTitle className="text-xl">{offer.title}</CardTitle>
-              <p className="text-base text-gray-600">{offer.category}</p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="flex items-center text-xl text-green-600 font-semibold">
-                <AlertCircle className="w-4 h-4 mr-1" /> {offer.matches.length}{" "}
-                matches
-              </span>
-            </div>
-          </div>
-        </CardHeader>
-      </Card>
-    </DialogTrigger>
-    <DialogContent className="sm:max-w-[600px]">
-      <DialogHeader>
-        <DialogTitle>Matches for: {offer.title}</DialogTitle>
-      </DialogHeader>
-      <div className="mt-4 max-h-[60vh] overflow-y-auto">
-        {offer.matches.map((match) => (
-          <MatchItem key={match.id} match={match} />
-        ))}
-      </div>
-    </DialogContent>
-  </Dialog>
-);
-
-export const YourOffers: React.FC = () => (
-  <div className="relative">
-    <div className="absolute top-0 left-1/2 border border-gray-300 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 rounded-full px-6 py-2 z-10">
-      <h2 className="font-semibold">Your Offers</h2>
+export const OfferColumn = ({ setSelectedItem, className }) => (
+  <div className={`relative ${className}`}>
+    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-yellow-200 rounded-full px-6 py-2 z-10">
+      <h2 className="font-semibold text-yellow-800">Your Offers</h2>
     </div>
-    <Card className="pt-8 max-h-[660px] overflow-scroll">
+    <div className="pt-8 max-h-[calc(100vh-200px)] overflow-y-auto">
       <CardContent>
         {yourOffers.map((offer) => (
-          <OfferItem key={offer.id} offer={offer} />
+          <OfferItem key={offer.id} offer={offer} onClick={setSelectedItem} />
         ))}
       </CardContent>
-    </Card>
+    </div>
   </div>
 );

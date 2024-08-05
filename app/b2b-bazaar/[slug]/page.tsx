@@ -26,7 +26,7 @@ async function getEventData(id: string): Promise<Event> {
     b2bEvents: [
       {
         id: 1,
-        title: "AI in Healthcare",
+        title: "Digital Koshi - Bridging Innovation",
         date: "Dec 22, 2024",
         time: "10:00 AM",
         venue: "Birat Expo Hall",

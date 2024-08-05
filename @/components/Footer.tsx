@@ -13,7 +13,7 @@ const Footer = () => (
         <div className="space-y-4">
           <Link href="/" className="flex items-center">
             <h1 className="font-extrabold text-3xl lg:text-4xl">
-              b2bbazzar<span className="text-yellow-500">.</span>
+              BiratbazzarB2B<span className="text-yellow-500">.</span>
             </h1>
           </Link>
           <p className="text-gray-600 text-sm leading-7">

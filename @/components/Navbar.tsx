@@ -41,10 +41,10 @@ const Navbar = () => {
     },
     { href: "/wish-and-offers", label: "Wish & Offers" },
     // { href: "/business-clinic", label: "Business Clinic" },
-    { href: "/vocational-training", label: "Vocational Training" },
-    { href: "/agricultural-training", label: "Agricultural Training" },
-    // { href: "/fundraising", label: "Fundraising" },
-    { href: "/job-board", label: "Jobs" },
+    // { href: "/vocational-training", label: "Vocational Training" },
+    // { href: "/agricultural-training", label: "Agricultural Training" },
+    { href: "/fundraising", label: "Fundraising" },
+    // { href: "/job-board", label: "Jobs" },
   ];
 
   return (
@@ -54,7 +54,7 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <h1 className="font-extrabold text-2xl lg:text-3xl">
-                BiratazzarB2B<span className="text-yellow-500">.</span>
+                BiratbazzarB2B<span className="text-yellow-500">.</span>
               </h1>
             </Link>
           </div>
