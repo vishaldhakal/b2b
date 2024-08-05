@@ -16,7 +16,7 @@ export const CompanyInfoStep = ({ form }) => (
       name="company"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Company</FormLabel>
+          <FormLabel>Company Name</FormLabel>
           <FormControl>
             <Input placeholder="Your company name" {...field} />
           </FormControl>
@@ -30,7 +30,7 @@ export const CompanyInfoStep = ({ form }) => (
         name="position"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Position</FormLabel>
+            <FormLabel>Your Current Position</FormLabel>
             <FormControl>
               <Input placeholder="Your position" {...field} />
             </FormControl>
@@ -43,7 +43,7 @@ export const CompanyInfoStep = ({ form }) => (
         name="companyPhone"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Phone</FormLabel>
+            <FormLabel>Company Phone Number</FormLabel>
             <FormControl>
               <Input
                 placeholder="Your phone number"
@@ -62,7 +62,7 @@ export const CompanyInfoStep = ({ form }) => (
         name="companyEmail"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>Company Email</FormLabel>
             <FormControl>
               <Input placeholder="Your email address" {...field} />
             </FormControl>
@@ -75,7 +75,7 @@ export const CompanyInfoStep = ({ form }) => (
         name="companyAddress"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Address</FormLabel>
+            <FormLabel>Company Address</FormLabel>
             <FormControl>
               <Input placeholder="Your company address" {...field} />
             </FormControl>
@@ -86,10 +86,23 @@ export const CompanyInfoStep = ({ form }) => (
     </div>
     <FormField
       control={form.control}
+      name="companyWebsite"
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>Company Website</FormLabel>
+          <FormControl>
+            <Input placeholder="Your company website" {...field} />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+    <FormField
+      control={form.control}
       name="companyDescription"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Description</FormLabel>
+          <FormLabel>Company Description</FormLabel>
           <FormControl>
             <Textarea placeholder="Your company description" {...field} />
           </FormControl>

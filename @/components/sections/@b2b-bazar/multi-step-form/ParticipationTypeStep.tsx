@@ -29,7 +29,6 @@ export const ParticipationTypeStep = ({ form }) => (
     name="participationType"
     render={({ field }) => (
       <FormItem className="space-y-4">
-        <FormLabel>Participation Type</FormLabel>
         <FormControl>
           <div className="flex justify-center space-x-4">
             <ToggleButton

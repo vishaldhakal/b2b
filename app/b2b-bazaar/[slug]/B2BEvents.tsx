@@ -72,7 +72,7 @@ const B2BEvents: React.FC<B2BEventsProps> = ({ events, mainEventTitle }) => {
                   </DialogTrigger>
 
                   <DialogContent
-                    className="sm:max-w-2xl max-w-[95vw]"
+                    className="sm:max-w-4xl overflow-y-auto max-h-[calc(100vh-4rem)]"
                     onInteractOutside={(e) => {
                       e.preventDefault();
                     }}

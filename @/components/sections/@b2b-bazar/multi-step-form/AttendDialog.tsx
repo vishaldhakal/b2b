@@ -26,6 +26,7 @@ const companyInfoSchema = yup.object().shape({
     .email("Invalid email")
     .required("Company email is required"),
   companyAddress: yup.string().required("Company address is required"),
+  companyWebsite: yup.string().url("Invalid URL").optional(),
   companyDescription: yup.string().required("Company description is required"),
 });
 
@@ -36,12 +37,36 @@ const participationTypeSchema = yup.object().shape({
     .required("Participation type is required"),
 });
 
+const productSchema = yup.object().shape({
+  name: yup.string().required("Product name is required"),
+  hsCode: yup.string().required("HS Code is required"),
+  description: yup.string(),
+});
+
 const wishOfferSchema = yup.object().shape({
   title: yup.string().required("Title is required"),
   category: yup.string().required("Category is required"),
   description: yup.string().required("Description is required"),
   location: yup.string().required("Location is required"),
+  service_or_product: yup
+    .string()
+    .oneOf(["service", "product"])
+    .required("Offer type is required"),
+  price: yup
+    .number()
+    .required("Price is required")
+    .positive("Price must be positive"),
+  products: yup
+    .array()
+    .when(["service_or_product"], ([service_or_product], schema) =>
+      service_or_product === "product"
+        ? schema.of(productSchema).min(1, "At least one product is required")
+        : schema
+    ),
 });
+
+export type WishOfferFormData = yup.InferType<typeof wishOfferSchema> &
+  yup.InferType<typeof participationTypeSchema>;
 
 // Combine all schemas
 const schema = personalInfoSchema
@@ -79,6 +104,27 @@ export const MultiStepForm: React.FC<{ onClose: () => void }> = ({
   const form = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      company: "",
+      position: "",
+      companyPhone: "",
+      companyEmail: "",
+      companyAddress: "",
+      companyWebsite: "",
+      companyDescription: "",
+      participationType: undefined,
+      title: "",
+      category: "",
+      description: "",
+      location: "",
+      service_or_product: undefined,
+      products: [],
+      price: undefined,
+    },
   });
 
   const onSubmit = async (data: FormData) => {
@@ -107,9 +153,8 @@ export const MultiStepForm: React.FC<{ onClose: () => void }> = ({
       schema: participationTypeSchema,
     },
     {
-      title: "Wish/Offer Details",
       component: WishOfferStep,
-      schema: wishOfferSchema,
+      schema: wishOfferSchema.concat(participationTypeSchema),
     },
   ];
 
@@ -149,16 +194,12 @@ export const MultiStepForm: React.FC<{ onClose: () => void }> = ({
     return <ThankYouComponent onClose={onClose} />;
   }
 
-  // useEffect(() => {
-  //   if (step === steps.length - 1) {
-  //     form.handleSubmit(onSubmit)();
-  //   }
-  // }, [step]);
-
   return (
     <Form {...form}>
       <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-        <h2 className="text-lg font-semibold">{steps[step].title}</h2>
+        {steps[step].title ? (
+          <h2 className="text-lg font-semibold">{steps[step].title}</h2>
+        ) : null}
         <CurrentStep form={form} />
         <div className="flex justify-between mt-6">
           {step > 0 && (

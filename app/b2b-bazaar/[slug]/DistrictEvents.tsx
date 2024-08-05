@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { Calendar, MapPin, ChevronRight } from "lucide-react";
+import React, { useState } from "react";
+import { Calendar, MapPin, ChevronRight, X } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -36,6 +36,16 @@ const DistrictEvents: React.FC<DistrictEventsProps> = ({
   events,
   mainEventTitle,
 }) => {
+  const [openDialog, setOpenDialog] = useState<number | null>(null);
+
+  const handleOpenDialog = (eventId: number) => {
+    setOpenDialog(eventId);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(null);
+  };
+
   return (
     <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8">
       <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-800">
@@ -72,11 +82,17 @@ const DistrictEvents: React.FC<DistrictEventsProps> = ({
                   </p>
                 </div>
 
-                <Dialog>
+                <Dialog
+                  open={openDialog === event.id}
+                  onOpenChange={(open) =>
+                    open ? handleOpenDialog(event.id) : handleCloseDialog()
+                  }
+                >
                   <DialogTrigger asChild>
                     <Button
                       variant="outline"
                       className="group hover:bg-blue-500 hover:text-white transition-all duration-300 w-full sm:w-auto mt-2 sm:mt-0"
+                      onClick={() => handleOpenDialog(event.id)}
                     >
                       <span className="mr-1">Attend this Meeting</span>
                       <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -84,20 +100,32 @@ const DistrictEvents: React.FC<DistrictEventsProps> = ({
                   </DialogTrigger>
 
                   <DialogContent
-                    className="sm:max-w-2xl max-w-[95vw]"
+                    className="sm:max-w-2xl max-w-[95vw] max-h-[90vh] flex flex-col"
                     onInteractOutside={(e) => {
                       e.preventDefault();
                     }}
                   >
-                    <DialogHeader className="pb-2 border-b border-gray-200">
-                      <DialogTitle className="text-xl sm:text-2xl font-bold">
-                        Attend Event: {event.district}
-                      </DialogTitle>
-                      <p className="text-xs sm:text-sm text-gray-500 mt-1">
-                        Part of {mainEventTitle}
-                      </p>
+                    <DialogHeader className="pb-2 border-b border-gray-200 flex-shrink-0 flex justify-between items-center">
+                      <div>
+                        <DialogTitle className="text-xl sm:text-2xl font-bold">
+                          Attend Event: {event.district}
+                        </DialogTitle>
+                        <p className="text-xs sm:text-sm text-gray-500 mt-1">
+                          Part of {mainEventTitle}
+                        </p>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={handleCloseDialog}
+                        className="text-gray-500 hover:text-gray-700"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
                     </DialogHeader>
-                    <MultiStepForm onClose={() => {}} />
+                    <div className="overflow-y-auto flex-grow">
+                      <MultiStepForm onClose={handleCloseDialog} />
+                    </div>
                   </DialogContent>
                 </Dialog>
               </div>
