@@ -3,16 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
 
 import { Button } from "../../@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../../@/components/ui/sheet";
 
 const NavLink = ({ href, children }) => {
   const pathname = usePathname();
@@ -21,7 +13,7 @@ const NavLink = ({ href, children }) => {
   return (
     <Link
       href={href}
-      className={`text-base font-medium transition-all duration-200 flex justify-center items-center flex-col ${
+      className={`text-base font-medium transition-all duration-200 ${
         isActive ? "text-blue-600" : "text-black hover:text-blue-600"
       }`}
     >
@@ -31,80 +23,36 @@ const NavLink = ({ href, children }) => {
 };
 
 const Navbar = () => {
-  const pathname = usePathname();
-
   const navItems = [
-    {
-      href: "/b2b-bazaar",
-      label: "B2B Events",
-      subtitle: "Join Networking Events",
-    },
-    { href: "/wish-and-offers", label: "Wish & Offers" },
-    // { href: "/business-clinic", label: "Business Clinic" },
-    // { href: "/vocational-training", label: "Vocational Training" },
-    // { href: "/agricultural-training", label: "Agricultural Training" },
-    { href: "/fundraising", label: "Fundraising" },
-    // { href: "/job-board", label: "Jobs" },
+    { href: "/b2b-events", label: "B2B Events" },
+    { href: "/wish-offer", label: "Wish & Offer" },
+    { href: "/bds-services", label: "BDS Services" },
+    { href: "/business-registration", label: "Business Registration" },
+    { href: "/jobbriz", label: "JobBriz" },
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <nav className="flex items-center justify-between h-16 lg:h-20">
+    <header className="bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <h1 className="font-extrabold text-2xl lg:text-3xl">
-                BiratbazzarB2B<span className="text-yellow-500">.</span>
-              </h1>
+              <img src="/Logo.svg" alt="B2B birat bazaar" className="h-8" />
             </Link>
           </div>
 
-          <div className="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-8">
+          <div className="hidden md:flex md:items-center md:space-x-6">
             {navItems.map((item) => (
               <NavLink key={item.href} href={item.href}>
-                <span className="text-sm">{item.label}</span>
-                {item.subtitle && (
-                  <span className="block font-normal text-gray-500 text-xs">
-                    {item.subtitle}
-                  </span>
-                )}
+                {item.label}
               </NavLink>
             ))}
-          </div>
-
-          <div className="hidden lg:flex lg:items-center lg:ml-8">
-            <Button asChild>
-              <Link href="/login">Login / Register</Link>
-            </Button>
-          </div>
-
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="lg:hidden">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
+            <div className="hidden md:block">
+              <Button className="bg-blue-600 text-white hover:bg-blue-700">
+                Membership
               </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle className="font-extrabold text-2xl">
-                  b2bbazzar<span className="text-yellow-400">.</span>
-                </SheetTitle>
-              </SheetHeader>
-              <div className="mt-6 flex flex-col items-end space-y-4">
-                {navItems.map((item) => (
-                  <NavLink key={item.href} href={item.href}>
-                    {item.label}
-                  </NavLink>
-                ))}
-              </div>
-              <div className="mt-6">
-                <Button asChild className="w-full">
-                  <Link href="/login">Login / Register</Link>
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
+            </div>
+          </div>
         </nav>
       </div>
     </header>

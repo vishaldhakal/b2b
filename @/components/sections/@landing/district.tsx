@@ -33,7 +33,7 @@ const DistrictButton = ({ name }) => (
 );
 
 const DistrictSection = () => (
-  <>
+  <div className="py-16 container">
     <div>
       <h3 className="text-2xl font-black">District B2B Networking</h3>
       <p className="text-gray-600">
@@ -45,7 +45,7 @@ const DistrictSection = () => (
         ))}
       </div>
     </div>
-  </>
+  </div>
 );
 
 export default DistrictSection;

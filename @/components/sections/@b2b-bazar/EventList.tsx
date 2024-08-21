@@ -17,7 +17,7 @@ import {
 import Image from "next/image";
 import { Badge } from "../../../components/ui/badge";
 import Link from "next/link";
-import { Event } from "../../../../app/b2b-bazaar/[slug]/types";
+import { Event } from "../../../../app/b2b-events/[slug]/types";
 
 const mockEvents: Event[] = [
   {
@@ -167,7 +167,7 @@ const mockEvents: Event[] = [
 
 export const EventList: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {mockEvents.map((event) => (
         <Link href={`/b2b-bazaar/${event.slug}`} key={event.id}>
           <Card

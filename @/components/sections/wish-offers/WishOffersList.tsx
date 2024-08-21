@@ -17,7 +17,7 @@ import {
 import Image from "next/image";
 import { Badge } from "../../../components/ui/badge";
 import Link from "next/link";
-import { Event } from "../../../../app/b2b-bazaar/[slug]/types";
+import { Event } from "../../../../app/b2b-events/[slug]/types";
 
 const mockEvents: Event[] = [
   {
