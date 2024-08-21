@@ -1,3 +1,5 @@
+import B2BNetworkingEvents from "../../@/components/sections/@b2b-bazar/b2b-events-list";
+import B2BHero from "../../@/components/sections/@b2b-bazar/b2b-hero";
 import { EventList } from "../../@/components/sections/@b2b-bazar/EventList";
 import { DistrictSection } from "../../@/components/sections/@landing";
 // import { EventTabs } from "../../@/components/sections/@b2b-bazar/EventsTab";
@@ -5,13 +7,16 @@ import { DistrictSection } from "../../@/components/sections/@landing";
 
 const B2BBazaarPage: React.FC = () => {
   return (
-    <div className="pt-10">
-      <main className="">
-        {/* <SearchFilter /> */}
-        <EventList />
-        <DistrictSection />
-      </main>
-    </div>
+    <>
+      <B2BHero />
+      <div className="pt-10">
+        <main className="">
+          {/* <SearchFilter /> */}
+          <B2BNetworkingEvents />
+          <DistrictSection />
+        </main>
+      </div>
+    </>
   );
 };
 

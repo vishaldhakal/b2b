@@ -38,7 +38,7 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="max-w-2xl">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div>
@@ -63,7 +63,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <div className="flex items-center">
-          <div className="flex -space-x-2 mr-2">
+          <div className="flex -space-x-3 mr-2">
             {event.attendees.slice(0, 4).map((attendee, i) => (
               <Avatar key={i} className="border-2 border-white">
                 {attendee.avatarUrl ? (

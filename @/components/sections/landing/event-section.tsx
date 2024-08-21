@@ -9,12 +9,12 @@ import { MapPin } from "lucide-react";
 import EventCard from "./event-card";
 
 // Types for our data
-interface Attendee {
+export interface Attendee {
   name: string;
   avatarUrl?: string;
 }
 
-interface EventData {
+export interface EventData {
   date: string;
   time: string;
   timezone: string;
@@ -23,13 +23,6 @@ interface EventData {
   imageUrl: string;
   description: string;
   attendees: Attendee[];
-}
-
-interface CompanyMember {
-  name: string;
-  role: string;
-  avatarUrl: string;
-  backgroundColor?: string;
 }
 
 // Main component
